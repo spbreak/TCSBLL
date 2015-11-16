@@ -1,9 +1,10 @@
 Pod::Spec.new do |s|
   s.name             = "TCSBLL"
-  s.version          = "0.2.0"
+  s.version          = "0.3.0"
   s.summary          = "算姓大师业务层."
   s.description      = <<-DESC
                         0.2.0:接入TCSDAL
+                        0.3.0:进行使用TCSDAL代码
                        DESC
   s.homepage         = "https://github.com/spbreak/TCSBLL"
   s.license          = 'MIT'
@@ -13,9 +14,9 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.source_files = 'Pod/Classes/**/*'
   s.resource_bundles = {
-    'TCSBLL' => ['Pod/Assets/*.png']
+    'TCSBLL' => ['Pod/Assets/*']
   }
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+    s.dependency 'FMDB','~>2.5'
 end

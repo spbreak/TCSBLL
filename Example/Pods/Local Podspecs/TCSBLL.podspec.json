@@ -19,7 +19,12 @@
   "source_files": "Pod/Classes/**/*",
   "resource_bundles": {
     "TCSBLL": [
-      "Pod/Assets/*.png"
+      "Pod/Assets/*"
+    ]
+  },
+  "dependencies": {
+    "FMDB": [
+      "~>2.5"
     ]
   }
 }

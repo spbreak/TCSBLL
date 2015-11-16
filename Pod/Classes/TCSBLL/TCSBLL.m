@@ -7,7 +7,7 @@
 //
 
 #import "TCSBLL.h"
-#import <TCSDAL/TCSDAL.h>
+#import "TCSDAL.h"
 
 @implementation TCSBLL
 
@@ -17,6 +17,7 @@
  *  @return 姓数组
  */
 +(NSArray *)getSurname{
+//    return nil;
     NSArray *arr=[TCSDAL getManyOfTable:@"name" withWhere:nil withArrField:@[@"name"]];
     return arr;
 }
@@ -26,6 +27,7 @@
  *  @return 配对姓数组
  */
 +(NSArray *)getNameOfMatching{
+//    return nil;
     NSArray *arr=[TCSDAL getManyOfTable:@"nameofmatching" withWhere:nil withArrField:@[@"name"]];
     return arr;
 }
@@ -35,6 +37,7 @@
  *  @return 占卜学堂数组
  */
 +(NSArray *)getDivinationOfSchool{
+//    return nil;
     NSArray *arr=[TCSDAL getManyOfTable:@"divinationofschool" withWhere:nil withArrField:@[@"title",@"content"]];
     return arr;
 }
@@ -46,6 +49,7 @@
  *  @return 单行姓氏
  */
 +(NSDictionary *)getSurnameOfSourceForSurname:(NSString *)surnanme{
+//    return nil;
     NSString *strWhere=[NSString stringWithFormat:@"surname = '%@'",surnanme];
     NSDictionary *dict=[TCSDAL getSingleOfTable:@"surnameofsource" withWhere:strWhere withArrField:@[@"content"]];
     return dict;

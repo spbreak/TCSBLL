@@ -59,11 +59,9 @@ install_resource()
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${BUILT_PRODUCTS_DIR}/TCSBLL.bundle"
-  install_resource "${BUILT_PRODUCTS_DIR}/TCSDAL.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "${BUILT_PRODUCTS_DIR}/TCSBLL.bundle"
-  install_resource "${BUILT_PRODUCTS_DIR}/TCSDAL.bundle"
 fi
 
 mkdir -p "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

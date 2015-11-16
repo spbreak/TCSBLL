@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define kDBName (@"TCSDAL.bundle/teacherofcomputesurname.sqlite")
+#define kDBName (@"TCSBLL.bundle/teacherofcomputesurname.sqlite")
 
 @interface TCSDAL : NSObject
 /**
