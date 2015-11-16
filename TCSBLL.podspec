@@ -1,10 +1,11 @@
 Pod::Spec.new do |s|
   s.name             = "TCSBLL"
-  s.version          = "0.3.0"
+  s.version          = "0.4.0"
   s.summary          = "算姓大师业务层."
   s.description      = <<-DESC
                         0.2.0:接入TCSDAL
                         0.3.0:进行使用TCSDAL代码
+                        0.4.0:添加天干地支
                        DESC
   s.homepage         = "https://github.com/spbreak/TCSBLL"
   s.license          = 'MIT'

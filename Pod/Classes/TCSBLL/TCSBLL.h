@@ -10,6 +10,12 @@
 
 @interface TCSBLL : NSObject
 /**
+ *  获得天干地支
+ *
+ *  @return 22个数据
+ */
++(NSArray *)getTianGanDiZhi;
+/**
  *  获得姓数组
  *
  *  @return 姓数组

@@ -31,6 +31,10 @@ describe(@"BLL", ^{
             NSArray *arr=[DICT allValues];
             [[theValue([arr count])should]beGreaterThan:theValue(0)];
         });
+        
+        it(@"TianGanDaZi",^{
+            [[theValue([[TCSBLL getTianGanDiZhi]count])should]equal:theValue(22)];
+        });
     });
 });
 
