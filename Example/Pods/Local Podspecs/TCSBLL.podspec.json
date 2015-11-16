@@ -1,0 +1,25 @@
+{
+  "name": "TCSBLL",
+  "version": "0.2.0",
+  "summary": "算姓大师业务层.",
+  "description": "0.2.0:接入TCSDAL",
+  "homepage": "https://github.com/spbreak/TCSBLL",
+  "license": "MIT",
+  "authors": {
+    "spbreak": "527108411@qq.com"
+  },
+  "source": {
+    "git": "https://github.com/spbreak/TCSBLL.git",
+    "tag": "0.2.0"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/Classes/**/*",
+  "resource_bundles": {
+    "TCSBLL": [
+      "Pod/Assets/*.png"
+    ]
+  }
+}

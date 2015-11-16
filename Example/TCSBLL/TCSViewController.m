@@ -7,6 +7,8 @@
 //
 
 #import "TCSViewController.h"
+#import "TCSDAL.h"
+#import "TCSBLL.h"
 
 @interface TCSViewController ()
 
@@ -18,6 +20,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    NSArray *ARR=[TCSDAL getManyOfTable:@"name" withWhere:nil withArrField:@[@"name"]];
+    NSDictionary *dict=[TCSBLL getSurnameOfSourceForSurname:@"党"];
 }
 
 - (void)didReceiveMemoryWarning
