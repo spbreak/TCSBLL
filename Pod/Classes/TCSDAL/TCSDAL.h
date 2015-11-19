@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#define kDBName (@"TCSBLL.bundle/teacherofcomputesurname.sqlite")
-
+//#define kDBName (@"TCSBLL.bundle/teacherofcomputesurname.sqlite")
+#define kDBName (@"TCSBLL.bundle/tcsdata")
 @interface TCSDAL : NSObject
 /**
  *  获取数据库文件位置

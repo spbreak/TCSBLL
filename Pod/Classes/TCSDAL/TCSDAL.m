@@ -7,10 +7,8 @@
 //
 
 #import "TCSDAL.h"
-
+#import "CCAES.h"
 #import "FMDB.h"
-
-
 
 @implementation TCSDAL
 static FMDatabase *db;
@@ -31,7 +29,12 @@ static FMDatabase *db;
  *  配置数据库地址
  */
 +(void)dataBaseForPath:(NSString *)strPath{
-    db=[FMDatabase databaseWithPath:strPath];
+    NSString *newPath=[CCAES AES256DecryptFile:strPath withKey:nil];
+    db=[FMDatabase databaseWithPath:newPath];
+}
+
++(void)deleteFile{
+    [CCAES deleteFile:db.databasePath];
 }
 
 /**
@@ -96,6 +99,7 @@ static FMDatabase *db;
         }
         [arrM addObject:dictM];
     }
+    [[self class]deleteFile];
     return [NSArray arrayWithArray:arrM];
 }
 
@@ -138,7 +142,7 @@ static FMDatabase *db;
         }
         break;
     }
-    
+    [[self class]deleteFile];
     return [NSDictionary dictionaryWithDictionary:dictM];
 }
 @end

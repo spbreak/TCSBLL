@@ -1,8 +1,8 @@
 {
   "name": "TCSBLL",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "summary": "算姓大师业务层.",
-  "description": "0.2.0:接入TCSDAL\n0.3.0:进行使用TCSDAL代码\n0.4.0:添加天干地支",
+  "description": "0.2.0:接入TCSDAL\n0.3.0:进行使用TCSDAL代码\n0.4.0:添加天干地支\n0.5.0:完善姓",
   "homepage": "https://github.com/spbreak/TCSBLL",
   "license": "MIT",
   "authors": {
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/spbreak/TCSBLL.git",
-    "tag": "0.4.0"
+    "tag": "0.5.0"
   },
   "platforms": {
     "ios": "7.0"

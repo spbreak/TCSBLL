@@ -21,7 +21,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     NSArray *ARR=[TCSDAL getManyOfTable:@"name" withWhere:nil withArrField:@[@"name"]];
-    NSDictionary *dict=[TCSBLL getSurnameOfSourceForSurname:@"党"];
+    NSDictionary *dict=[TCSBLL getSurnameOfSourceForSurname:@"一"];
 }
 
 - (void)didReceiveMemoryWarning

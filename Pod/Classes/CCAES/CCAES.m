@@ -1,0 +1,149 @@
+//
+//  CCAES.m
+//  CCSDK
+//
+//  Created by 许 强 on 13-10-28.
+//  Copyright (c) 2013年 许强. All rights reserved.
+//
+
+#import "CCAES.h"
+#import "NSData+Encryption_AES256.h"
+
+/**
+ *  加密解密的key
+ */
+static NSString *ccKeyAES256 = @"123+-*/fuckyou";
+
+
+@implementation CCAES
+
+/**
+ *  AES算法加密
+ *
+ *  @param key 密匙,传入nil值则使用默认KEY
+ *
+ *  @return 加密后的数据
+ */
++ (NSData *)AES256EncryptData:(NSData *)data withKey:(NSString *)key {
+    if ([data respondsToSelector:@selector(mmAES256EncryptWithKey:)]) {
+        NSString *realKey = key?key:ccKeyAES256;
+        return [data performSelector:@selector(mmAES256EncryptWithKey:) withObject:realKey];
+    }
+    else if ([data respondsToSelector:@selector(AES256EncryptWithKey:)]) {
+        NSString *realKey = key?key:ccKeyAES256;
+        return [data performSelector:@selector(AES256EncryptWithKey:) withObject:realKey];
+    }
+    return nil;
+}
+
+/**
+ *  AES算法解密
+ *
+ *  @param key 密匙,传入nil值则使用默认KEY
+ *
+ *  @return 解密后的数据
+ */
++ (NSData *)AES256Decrypt:(NSData *)data withKey:(NSString *)key {
+    if ([data respondsToSelector:@selector(mmAES256DecryptWithKey:)]) {
+        NSString *realKey = key?key:ccKeyAES256;
+        return [data performSelector:@selector(mmAES256DecryptWithKey:) withObject:realKey];
+    }
+    else if ([data respondsToSelector:@selector(AES256DecryptWithKey:)]) {
+        NSString *realKey = key?key:ccKeyAES256;
+        return [data performSelector:@selector(AES256DecryptWithKey:) withObject:realKey];
+    }
+    
+    return nil;
+}
+
+/**
+ *  加密文件
+ *
+ *  @param filePath    源文件路径
+ *  @param newFilePath 加密后的文件路径
+ *  @param key 秘钥,传入nil值则使用默认KEY
+ *  @return YES,加密成功, NO,加密失败
+ */
++ (BOOL)AES256EncryptFile:(NSString *)filePath withKey:(NSString *)key newPath:(NSString *)newFilePath {
+    NSData *orginalFileData = [NSData dataWithContentsOfFile:filePath];
+    NSString *realKey = key?key:ccKeyAES256;
+    NSData *encryptFileData = [orginalFileData mmAES256EncryptWithKey:realKey];
+#if 0
+    //为了保证数据统一性，这里不要使用AES256EncryptWithKey
+    if (encryptFileData == nil) {
+        encryptFileData = [orginalFileData AES256EncryptWithKey:realKey];
+    }
+#endif
+    BOOL success = [encryptFileData writeToFile:newFilePath atomically:YES];
+    if (!success) {
+        return NO;
+    }
+    return YES;
+}
+
+/**
+ *  解密文件，并写到document中，返回新文件的路径
+ *
+ *  @param filePath 解密后的文件路径
+ *  @param key 秘钥,传入nil值则使用默认KEY
+ *  @return new file path
+ */
++ (NSString *)AES256DecryptFile:(NSString *)filePath withKey:(NSString *)key{
+    NSData *encryptFileData = [NSData dataWithContentsOfFile:filePath];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+	
+    NSString *fileName = [filePath lastPathComponent];
+    NSString *decryptFilePath = [documentsDirectory stringByAppendingPathComponent:fileName];
+    decryptFilePath = [decryptFilePath stringByAppendingPathExtension:@"temp"];
+    
+    NSString *realKey = key?key:ccKeyAES256;
+    NSData *decryptFileData = [encryptFileData mmAES256DecryptWithKey:realKey];
+    if (decryptFileData == nil) {
+        decryptFileData = [encryptFileData AES256DecryptWithKey:realKey];
+    }
+    BOOL success = [decryptFileData writeToFile:decryptFilePath atomically:YES];
+    if (!success) {
+        return nil;
+    }
+    
+    return decryptFilePath;
+}
+
++ (NSString *)AES256DecryptFileTemp:(NSString *)filePath withKey:(NSString *)key{
+    NSData *encryptFileData = [NSData dataWithContentsOfFile:filePath];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+	
+    NSString *fileName = [filePath lastPathComponent];
+    NSString *decryptFilePath = [documentsDirectory stringByAppendingPathComponent:fileName];
+    decryptFilePath = [decryptFilePath stringByAppendingPathExtension:@"temp"];
+    
+    NSString *realKey = key?key:ccKeyAES256;
+    NSData *decryptFileData = [encryptFileData AES256DecryptWithKey:realKey];
+    BOOL success = [decryptFileData writeToFile:decryptFilePath atomically:YES];
+    if (!success) {
+        return nil;
+    }
+    
+    return decryptFilePath;
+}
+
+/**
+ *  用来删除解密后的文件
+ *  *该方法会在对象被释放是自动调用*
+ *  @return YES,成功, NO,失败
+ */
++ (BOOL)deleteFile:(NSString *)filePath {
+	NSError *error = nil;
+    [[NSFileManager defaultManager] removeItemAtPath:filePath error:&error];
+    if (error) {
+        NSLog(@"error:%@",error.description);
+        return NO;
+    }
+    return YES;
+}
+
+@end
